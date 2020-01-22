@@ -74,7 +74,6 @@ namespace MicroRabbit.Infra.Bus
 
             StartBasicConsume<T>();
         }
-
         private void StartBasicConsume<T>() where T : Event
         {
             var factory = new ConnectionFactory()
@@ -95,7 +94,6 @@ namespace MicroRabbit.Infra.Bus
 
             channel.BasicConsume(eventName, true, consumer);
         }
-
         private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
             var eventName = e.RoutingKey;
@@ -110,7 +108,6 @@ namespace MicroRabbit.Infra.Bus
 
             }
         }
-
         private async Task ProcessEvent(string eventName, string message)
         {
             if (_handlers.ContainsKey(eventName))
