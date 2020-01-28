@@ -9,6 +9,9 @@ using MicroRabbit.Banking.Application.Services;
 using MicroRabbit.Banking.Domain.Interfaces;
 using MicroRabbit.Banking.Data.Repository;
 using MicroRabbit.Banking.Data.Context;
+using MicroRabbit.Banking.Domain.Commands;
+using MicroRabbit.Banking.Domain.CommandHandlers;
+using MediatR;
 
 namespace MicroRabbit.Infra.IoC
 {
@@ -18,6 +21,9 @@ namespace MicroRabbit.Infra.IoC
         {
             // Domain Bus
             services.AddTransient<IEventBus, RabbitMQBus>();
+
+            // Domain Banking Commands
+            services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
 
             // Application Services
             services.AddTransient<IAccountService, AccountServices>();
